@@ -23,14 +23,26 @@
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Floodlight JS</a>
 			<div class="" id="navbarNavDropdown">
-				<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="rajnandan1" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script>
+				<a href="https://github.com/rajnandan1/floodlightjs">
+					<img height="24" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png" alt="github">
+				</a>
+				
 			</div>
+			
 		</div>
 	</nav>
 	<div class="container">
 		<br>
 		<h2>Floodlight JS Examples</h2>
 		<hr />
+		<h4>Installation from CDN</h4>
+		<code>
+		<pre style="background: #efefef;
+padding: 10px;
+border-radius: 4px;">
+&lt;script src=&quot;https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs/dist/floodlight.min.js&quot;&gt;&lt;/script&gt;
+</pre>
+		</code>
 		<h4>Basic Usage - Implement a quick google search</h4>
 		<p class="text-secondary">
 			The below code implements a google search using floodgate. It will listen for the <code>g</code> key. When someone presses
@@ -173,6 +185,7 @@ let fl = new FloodLight(config);
 }
 			</pre>
 		</code>
+		<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="rajnandan1" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script>
 	</div>
 
 	<!-- <script src="bisar.js" async defer></script> -->
@@ -227,6 +240,7 @@ let fl = new FloodLight(config);
 		cmdCal.addAction(["num1", "num2", "num3"], "{num1} x {num2} x {num3}", mul);
 		fl.run();
 	</script>
+	
 </body>
 
 </html>
