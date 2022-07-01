@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+	<!--[if lt IE 7]>
+			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	<nav class="navbar navbar-dark bg-primary navbar-expand-lg ">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Floodlight JS</a>
+			<div class="" id="navbarNavDropdown">
+				<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="rajnandan1" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<br>
+		<h2>Floodlight JS Examples</h2>
+		<hr />
+		<h4>Basic Usage - Implement a quick google search</h4>
+		<p class="text-secondary">
+			The below code implements a google search using floodgate. It will listen for the <code>g</code> key. When someone presses
+			<code>shift</code>+<code>g</code> it will show a search box.
+		</p>
+		<code>
+			<pre>
+let fl = new FloodLight();
+
+<span class="text-success">//this takes to parameters. first parameter is the `key`, second is the description</span>
+let cmd = fl.addCommand("g", "Search Something in google");
+
+<span class="text-success">//Implement a function that would handle the query. Takes one parameter</span>
+let implementSearchInGoogle = function(obj) {
+	location.href = "https://www.google.com/search?q=" + encodeURI(obj.query)
+};
+
+<span class="text-success">//Add the action for a command. Takes in a string array, a description and a function</span>
+cmd.addAction(["query"], "search {query} in google", implementSearchInGoogle);
+
+<span class="text-success">//Start floodlight. It will start listening</span>
+fl.run();
+			</pre>
+		</code>
+		<div class="text-primary alert alert-primary">
+			Try it. Hit <code>shift</code>+<code>g</code>
+		</div>
+
+
+
+		<h5>Multiple Commands - Add Social media search</h5>
+		<p class="text-secondary">
+			The below code implements a social search using floodgate. It will listen for the <code>s</code> key. It attaches two actions to one command.
+		</p>
+		<code>
+			<pre>
+let cmdSocial = fl.addCommand("s", "Search user name in social media");
+
+<span class="text-success">//Adding twitter</span>
+let implementSearchTwitter = function(obj) {
+	location.href = "https://twitter.com/" + encodeURI(obj.query)
+};
+cmdSocial.addAction(["query"], "search {query} in twitter", implementSearchTwitter);
+
+<span class="text-success">//Adding facebook</span>
+let implementSearchFB = function(obj) {
+	location.href = "https://www.facebook.com/" + encodeURI(obj.query)
+};
+cmdSocial.addAction(["query"], "search {query} in facebook", implementSearchFB);
+ 
+</pre>
+		</code>
+		<div class="text-primary alert alert-primary">
+			Try it. Hit <code>shift</code>+<code>s</code>
+		</div>
+
+
+
+
+		<h5>Multiple Params, Multiple Commands - Add, Subtract, Multiply two or three numbers</h5>
+		<p class="text-secondary">
+			The below code implements arithmetic operation. It will listen for the <code>c</code> key. It accepts more than one param.
+		</p>
+		<code>
+			<pre>
+let cmdCal = fl.addCommand("c", "Provide comma separated numbers");
+
+<span class="text-success">//Add 2 numbers</span>
+let add = function(obj) {
+	alert(Number(obj.num1) + Number(obj.num2))
+};
+cmdCal.addAction(["num1", "num2"], "{num1} + {num2}", add);
+
+<span class="text-success">//Subtract 2 numbers</span>
+let sub = function(obj) {
+	alert(Number(obj.num1) - Number(obj.num2))
+};
+cmdCal.addAction(["num1", "num2"], "{num1} - {num2}", sub);
+
+<span class="text-success">//Multiply 3 numbers</span>
+let mul = function(obj) {
+	alert(Number(obj.num1) * Number(obj.num2) * Number(obj.num3))
+};
+cmdCal.addAction(["num1", "num2", "num3"], "{num1} x {num2} x {num3}", mul);
+ 
+</pre>
+		</code>
+		<div class="text-primary alert alert-primary">
+			Try it. Hit <code>shift</code>+<code>c</code>
+		</div>
+
+		<h5>Customizations</h5>
+		<p class="text-secondary">
+			Floodlightjs gives you control over how the UI elements look. You can pass a class for advanced handling or use simple colors.
+		</p>
+		<h6>Simple Colors light or dark theme</h6>
+		<code>
+			<pre>
+let config = {
+	theme: {
+		dark:{ <span class="text-success">//light or dark</span>
+			primary: "#111",
+			secondary: "#231e24"
+		}
+	}
+}
+let fl = new FloodLight(config);
+			</pre>
+		</code>	
+		<hr/>
+		<h6>Add your class</h6>
+		<code>
+			<pre>
+let config = {
+	cssClassPrefix: "fooclass"
+}	
+<span class="text-success">//It will add this prefix in all the UI elements</span>
+let fl = new FloodLight(config);
+</pre></code>
+<h6>Add your CSS</h6>
+<code>
+			<pre>
+<span class="text-success">//Once added you can handle CSS like this</span>
+.fooclass-wrapper{
+	<span class="text-success">/*Main Overlay Component*/</span>
+}
+.fooclass-search{
+	<span class="text-success">/*Main Component*/</span>
+}
+.fooclass-input{
+	<span class="text-success">/*Search Component*/</span>
+}
+.fooclass-dropdown{
+	<span class="text-success">/*Dropdown Component*/</span>
+}
+.fooclass-item{
+	<span class="text-success">/*Items Component*/</span>
+}
+			</pre>
+		</code>
+	</div>
+
+	<!-- <script src="bisar.js" async defer></script> -->
+	<script src="src/floodlight.js"></script>
+	<script>
+		let fl = new FloodLight();
+
+		//this takes to parameters. first parameter is the `key`, second is the description
+		let cmd = fl.addCommand("g", "Search Something in google");
+
+		//Implement a function that would handle the query. Takes one parameter
+
+		let implementSearchInGoogle = function(obj) {
+			location.href = "https://www.google.com/search?q=" + encodeURI(obj.query)
+		};
+
+
+		//Add the action for a command. Takes in a string array, a description and a function
+		cmd.addAction(["query"], "search {query} in google", implementSearchInGoogle);
+
+		let cmdSocial = fl.addCommand("s", "Search user name in social media");
+
+		let implementSearchTwitter = function(obj) {
+			location.href = "https://twitter.com/" + encodeURI(obj.query)
+		};
+		cmdSocial.addAction(["query"], "search {query} in twitter", implementSearchTwitter);
+
+		let implementSearchFB = function(obj) {
+			location.href = "https://www.facebook.com/" + encodeURI(obj.query)
+		};
+		cmdSocial.addAction(["query"], "search {query} in facebook", implementSearchFB);
+
+
+		let cmdCal = fl.addCommand("c", "Provide comma separated numbers");
+
+		//Add
+		let add = function(obj) {
+			alert(Number(obj.num1) + Number(obj.num2))
+		};
+		cmdCal.addAction(["num1", "num2"], "{num1} + {num2}", add);
+
+		//Subtract
+		let sub = function(obj) {
+			alert(Number(obj.num1) - Number(obj.num2))
+		};
+		cmdCal.addAction(["num1", "num2"], "{num1} - {num2}", sub);
+
+		//Multiply
+		let mul = function(obj) {
+			alert(Number(obj.num1) * Number(obj.num2) * Number(obj.num3))
+		};
+		cmdCal.addAction(["num1", "num2", "num3"], "{num1} x {num2} x {num3}", mul);
+		fl.run();
+	</script>
+</body>
+
+</html>
