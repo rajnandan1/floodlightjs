@@ -81,6 +81,7 @@ fl.run();
 		</p>
 		<code>
 			<pre>
+let fl = new FloodLight();
 let cmdSocial = fl.addCommand("s", "Search user name in social media");
 
 <span class="text-success">//Adding twitter</span>
@@ -95,6 +96,7 @@ let implementSearchFB = function(obj) {
 };
 cmdSocial.addAction(["query"], "search {query} in facebook", implementSearchFB);
  
+fl.run();
 </pre>
 		</code>
 		<div class="text-primary alert alert-primary">
@@ -110,6 +112,7 @@ cmdSocial.addAction(["query"], "search {query} in facebook", implementSearchFB);
 		</p>
 		<code>
 			<pre>
+let fl = new FloodLight();
 let cmdCal = fl.addCommand("c", "Provide comma separated numbers");
 
 <span class="text-success">//Add 2 numbers</span>
@@ -129,7 +132,8 @@ let mul = function(obj) {
 	alert(Number(obj.num1) * Number(obj.num2) * Number(obj.num3))
 };
 cmdCal.addAction(["num1", "num2", "num3"], "{num1} x {num2} x {num3}", mul);
- 
+
+fl.run();
 </pre>
 		</code>
 		<div class="text-primary alert alert-primary">
