@@ -2,7 +2,11 @@
 Inspired from macOS spotlight, floodlight is simple JS library that will show a search area. How the search is handled is completely on you.
 
 You can register any key. To run it will bind an event with your specified key and `shift`
-
+## Installation
+From CDN
+```
+<script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs/dist/floodlight.min.js"></script>
+```
 ## Basic Usage - Implement a quick google search `shift`+`g`
 
 The below code implements a google search using floodgate. It will listen for the `g` key. When someone presses shift+g it will show a search box.
