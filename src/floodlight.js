@@ -263,6 +263,7 @@ class FloodLight {
                 addItems(document.getElementById(dropDown));
                 return;
             }
+			 
             const template = document.createElement("div");
             template.setAttribute("id", dropDown);
             template.style.width = "100%";
@@ -274,9 +275,11 @@ class FloodLight {
             template.style.backgroundColor = colorItem;
             template.style.border = "2px solid " + colorItemActive;
             div.parentNode.appendChild(template);
+			addItems(document.getElementById(dropDown));
         }
         function searchInput(e) {
             let div = e.target || e.srcElement;
+			console.log(div.value);
             if (div.value.length > 0) {
                 addDropDown(document.getElementById(inputBox));
             } else {
