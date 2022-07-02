@@ -7,7 +7,7 @@ You can register any key. To run it will bind an event with your specified key a
 ## Installation
 From CDN
 ```
-<script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.1/dist/floodlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.2/dist/floodlight.min.js"></script>
 ```
 ## Demo
 [Live instance of Floodlight](https://rajnandan1.github.io/floodlightjs/index.html)
