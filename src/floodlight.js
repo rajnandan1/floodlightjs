@@ -157,12 +157,13 @@ class FloodLight {
         _this.run = function () {
             for (let i = 0; i < allCommands.length; i++) {
                 const element = allCommands[i];
+				
+				
                 document.addEventListener("keydown", function logKey(e) {
-                    if (
-                        e.keyCode == keyCharToCode[element.key.toUpperCase()] &&
-                        e.shiftKey
-                    ) {
-                        addContainer(i);
+                    if (e.keyCode == keyCharToCode[element.key.toUpperCase()] && e.shiftKey) {
+						if (!isTextInput(document.activeElement)){
+							addContainer(i);
+						}
                     } else if (e.key === "Escape") {
                         hideBisar();
                     }
@@ -460,6 +461,29 @@ class FloodLight {
             }
             allItems[i].setAttribute("selected", true);
             allItems[i].style.backgroundColor = colorItemActive;
+        }
+		function isTextInput(ele) {
+            let tagName = ele.tagName;
+            if (tagName === "INPUT") {
+                let validType = [
+                    "text",
+                    "password",
+                    "number",
+                    "email",
+                    "tel",
+                    "url",
+                    "search",
+                    "date",
+                    "datetime",
+                    "datetime-local",
+                    "time",
+                    "month",
+                    "week",
+                ];
+                let eleType = ele.type;
+                return validType.includes(eleType);
+            }
+            return false;
         }
         function makeid(length) {
             var result = "";
