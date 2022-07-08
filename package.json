@@ -1,5 +1,5 @@
 {
-  "name": "floodlightjs",
+  "name": "@rajnandan1/floodlightjs",
   "version": "1.0.3",
   "description": "Easily create key board shortcuts for your JS functions. Built using JS only with no other dependency. Inspired from MacOS spotlight ",
   "main": "es6/floodlight.js",
