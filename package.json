@@ -1,0 +1,28 @@
+{
+  "name": "floodlightjs",
+  "version": "1.0.3",
+  "description": "Easily create key board shortcuts for your JS functions. Built using JS only with no other dependency. Inspired from MacOS spotlight ",
+  "main": "es6/floodlight.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node scripts/build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajnandan1/floodlightjs.git"
+  },
+  "keywords": [
+    "floodlight",
+    "spotlight",
+    "javascript"
+  ],
+  "author": "Raj nandan Sharma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rajnandan1/floodlightjs/issues"
+  },
+  "homepage": "https://github.com/rajnandan1/floodlightjs#readme",
+  "devDependencies": {
+    "node-minify": "^3.6.0"
+  }
+}

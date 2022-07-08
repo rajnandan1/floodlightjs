@@ -500,3 +500,4 @@ class FloodLight {
         }
     }
 }
+export default function(opt){return new FloodLight(opt);}
