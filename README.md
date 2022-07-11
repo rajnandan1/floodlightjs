@@ -9,12 +9,18 @@ From CDN
 ```
 <script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.4/dist/floodlight.min.js"></script>
 ```
+From NPM
+```
+npm i floodlightjs
+import floodlight from 'floodlightjs';
+```
 ## Demo
 [Live instance of Floodlight](https://rajnandan1.github.io/floodlightjs/index.html)
 ## Basic Usage - Implement a quick google search `shift`+`g`
 
 The below code implements a google search using floodgate. It will listen for the `g` key. When someone presses shift+g it will show a search box.
 ```
+//import floodlight from 'floodlightjs'
 let fl = new FloodLight();
 
 //this takes to parameters. first parameter is the `key`, second is the description
