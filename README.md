@@ -47,7 +47,7 @@ fl.run();
 
 ## Multiple Commands - Add Social media search `shift`+`s`
 
-The below code implements a social search using floodgate. It will listen for the `s` key. It attaches two actions to one command.
+The below code implements a social search using floodgate. It will listen for the `shift+s` key. It attaches two actions to one command.
 
 ```
 let fl = new FloodLight();
@@ -69,7 +69,7 @@ fl.run();
 ```
 ## Multiple Params, Multiple Commands - Add, Subtract, Multiply two or three numbers `cmd`+`x` or `ctrl`+`x`
 
-The below code implements arithmetic operation. It will listen for the `x` key. It accepts more than one param.
+The below code implements arithmetic operation. It will listen for the `ctrl+x` key. It accepts more than one param.
 
 ```
 let fl = new FloodLight();
