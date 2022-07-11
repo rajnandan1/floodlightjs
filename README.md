@@ -14,18 +14,18 @@ You can register any key. To trigger, it will bind an event with your specified 
 ## Installation
 From CDN
 ```
-<script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.4/dist/floodlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.5/dist/floodlight.min.js"></script>
 ```
 From NPM
 ```
 npm i floodlightjs
 import floodlight from 'floodlightjs';
 ```
-## Demo
+## Demo + Documentation
 [Live instance of Floodlight](https://rajnandan1.github.io/floodlightjs/index.html)
-## Basic Usage - Implement a quick google search `shift`+`g`
+## Basic Usage - Implement a quick google search `g`
 
-The below code implements a google search using floodgate. It will listen for the `g` key. When someone presses shift+g it will show a search box.
+The below code implements a google search using floodgate. It will listen for the `g` key. When someone presses `g` it will show a search box.
 ```
 //import floodlight from 'floodlightjs'
 let fl = new FloodLight();
@@ -67,13 +67,13 @@ cmdSocial.addAction(["query"], "search {query} in facebook", implementSearchFB);
 //Start floodlight. It will start listening
 fl.run();
 ```
-## Multiple Params, Multiple Commands - Add, Subtract, Multiply two or three numbers `shift`+`c`
+## Multiple Params, Multiple Commands - Add, Subtract, Multiply two or three numbers `cmd`+`x` or `ctrl`+`x`
 
-The below code implements arithmetic operation. It will listen for the `c` key. It accepts more than one param.
+The below code implements arithmetic operation. It will listen for the `x` key. It accepts more than one param.
 
 ```
 let fl = new FloodLight();
-let cmdCal = fl.addCommand("c", "Provide comma separated numbers");
+let cmdCal = fl.addCommand("ctrl+x", "Provide comma separated numbers");
 
 //Add 2 numbers
 let add = function(obj) {

@@ -154,16 +154,31 @@ class FloodLight {
         _this.run = function () {
             for (let i = 0; i < allCommands.length; i++) {
                 const element = allCommands[i];
-
+				let cmdCombo = element.key.toUpperCase().split("+");
+				let comboKey = cmdCombo[0];
+				let comboTrigger = "";
+				if(cmdCombo.length > 1){
+					comboKey = cmdCombo[1];
+					comboTrigger = cmdCombo[0];
+					
+				}
+				if(!["SHIFT", "CMD", "CTRL", ""].includes(comboTrigger)){
+					throw new Error("Invalid Cmd");
+				}
+				 
                 document.addEventListener("keydown", function logKey(e) {
-                    if (
-                        e.keyCode == keyCharToCode[element.key.toUpperCase()] &&
-                        e.shiftKey
-                    ) {
+                    if(comboTrigger == "" && e.keyCode == keyCharToCode[comboKey]){
+						if (!isTextInput(document.activeElement)) {
+                            addContainer(i);
+                        }
+					}else if (comboTrigger == "SHIFT" && e.keyCode == keyCharToCode[comboKey] && e.shiftKey) {
                         if (!isTextInput(document.activeElement)) {
                             addContainer(i);
                         }
-                    } else if (e.key === "Escape") {
+                    } else if(["CMD", "CTRL"].includes(comboTrigger) && e.keyCode == keyCharToCode[comboKey] && (e.ctrlKey || e.metaKey)){
+						e.preventDefault();
+						addContainer(i);
+					} else if (e.key === "Escape") {
                         hideBisar();
                     }
                 });
@@ -182,7 +197,10 @@ class FloodLight {
                     fn: fn,
                 });
             };
-            cmd.key = key;
+            cmd.key = key.replace(/\s/g,'');
+			if(cmd.key == ""){
+				throw new Error("Invalid Cmd")
+			}
             cmd.name = name;
 
             allCommands.push(cmd);
@@ -310,6 +328,13 @@ class FloodLight {
             document
                 .getElementById(inputBox)
                 .addEventListener("input", searchInput);
+			document
+                .getElementById(inputBox)
+                .addEventListener("keydown", function(e){
+					if (e.keyCode == 40 || e.keyCode == 38) {
+                       e.preventDefault();
+                    } 
+				}, false);
         }
 
         function addSearch(div) {
@@ -456,6 +481,7 @@ class FloodLight {
         }
         function selectOne(i) {
             let allItems = document.getElementsByClassName(itemClass);
+			if(allItems.length == 0) return;
             for (let i = 0; i < allItems.length; i++) {
                 const element = allItems[i];
                 element.style.backgroundColor = colorItem;

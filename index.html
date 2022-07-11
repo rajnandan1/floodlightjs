@@ -14,6 +14,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<style>
+	.flcode{
+		color: #efefef;
+		background: #444;
+		font-size: 14px;
+		padding: 2px 5px;
+		border-radius: 4px;
+		font-family: courier;
+	}
+	.block{
+		display: block;
+		margin-bottom: 10px;
+	}
+	.block pre{
+		margin-bottom: 0px;
+	}
+	</style>
 </head>
 
 <body>
@@ -36,20 +53,25 @@
 		<br>
 		<h2>Floodlight JS Examples</h2>
 		<hr />
-		<h4>Installation from CDN</h4>
-		<code>
-		<pre style="background: #efefef;
-padding: 10px;
-border-radius: 4px;">
-&lt;script src=&quot;https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.4/dist/floodlight.min.js&quot;&gt;&lt;/script&gt;
+		<h3>Installation</h3>
+		<h6>From CDN</h6>
+		<code class="flcode block">
+		<pre >
+&lt;script src=&quot;https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.5/dist/floodlight.min.js&quot;&gt;&lt;/script&gt;
 </pre>
 		</code>
-		<h4>Basic Usage - Implement a quick google search</h4>
+		<h6>From NPM</h6>
+		<code class="flcode block">
+		<pre >
+npm i floodlightjs</pre>
+		</code>
+		<hr />
+		<h4>➡️ Basic Usage - Implement a quick google search</h4>
 		<p class="text-secondary">
-			The below code implements a google search using floodgate. It will listen for the <code>g</code> key. When someone presses
-			<code>shift</code>+<code>g</code> it will show a search box.
+			The below code implements a google search using <code class="flcode">floodlightjs</code>. It will listen for the <code class="flcode">g</code> key. When someone presses
+			<code class="flcode">g</code> it will show a search box.
 		</p>
-		<code>
+		<code class="flcode block">
 			<pre>
 let fl = new FloodLight();
 
@@ -69,21 +91,23 @@ fl.run();
 			</pre>
 		</code>
 		<div class="text-primary alert alert-primary">
-			Try it. Hit <code>shift</code>+<code>g</code>
+			Try it. Hit <code class="flcode">g</code>
 		</div>
 
 		<div class="alert alert-warning">
 			Hit <code>esc</code> to close floodlight
 		</div>
 
-		<h5>Multiple Commands - Add Social media search</h5>
+<!--Separator-->
+		<h4>➡️ Multiple Commands - Add Social media search</h4>
 		<p class="text-secondary">
-			The below code implements a social search using floodgate. It will listen for the <code>s</code> key. It attaches two actions to one command.
+			The below code implements a social search using floodgate. It will listen for the <code class="flcode">shift+s</code> key. It attaches two actions to one command.
 		</p>
-		<code>
+		<code class="flcode block">
 			<pre>
 let fl = new FloodLight();
-let cmdSocial = fl.addCommand("s", "Search user name in social media");
+
+let cmdSocial = fl.addCommand("shfit+s", "Search user name in social media");
 
 <span class="text-success">//Adding twitter</span>
 let implementSearchTwitter = function(obj) {
@@ -101,20 +125,20 @@ fl.run();
 </pre>
 		</code>
 		<div class="text-primary alert alert-primary">
-			Try it. Hit <code>shift</code>+<code>s</code>
+			Try it. Hit <code class="flcode">shift+s</code>
 		</div>
 
 
+<!--Separator-->
 
-
-		<h5>Multiple Params, Multiple Commands - Add, Subtract, Multiply two or three numbers</h5>
+		<h4>➡️ Multiple Params, Multiple Commands - Add, Subtract, Multiply two or three numbers</h4>
 		<p class="text-secondary">
-			The below code implements arithmetic operation. It will listen for the <code>c</code> key. It accepts more than one param.
+			The below code implements arithmetic operation. It will listen for the <code class="flcode">cmd+x</code> or <code class="flcode">ctrl+x</code> key. It accepts more than one param.
 		</p>
-		<code>
+		<code class="flcode block">
 			<pre>
 let fl = new FloodLight();
-let cmdCal = fl.addCommand("c", "Provide comma separated numbers");
+let cmdCal = fl.addCommand("cmd+x", "Provide comma separated numbers");
 
 <span class="text-success">//Add 2 numbers</span>
 let add = function(obj) {
@@ -138,15 +162,15 @@ fl.run();
 </pre>
 		</code>
 		<div class="text-primary alert alert-primary">
-			Try it. Hit <code>shift</code>+<code>c</code>
+			Try it. Hit <code class="flcode">cmd+x</code> or <code class="flcode">ctrl+x</code>
 		</div>
-
-		<h5>Customizations</h5>
+<!--Separator-->
+		<h4>➡️ Customizations</h4>
 		<p class="text-secondary">
 			Floodlightjs gives you control over how the UI elements look. You can pass a class for advanced handling or use simple colors.
 		</p>
 		<h6>Simple Colors light or dark theme</h6>
-		<code>
+		<code class="flcode block">
 			<pre>
 let config = {
 	theme: {
@@ -159,9 +183,8 @@ let config = {
 let fl = new FloodLight(config);
 			</pre>
 		</code>	
-		<hr/>
 		<h6>Add your class</h6>
-		<code>
+		<code class="flcode block">
 			<pre>
 let config = {
 	cssClassPrefix: "fooclass"
@@ -170,7 +193,7 @@ let config = {
 let fl = new FloodLight(config);
 </pre></code>
 <h6>Add your CSS</h6>
-<code>
+<code class="flcode block">
 			<pre>
 <span class="text-success">//Once added you can handle CSS like this</span>
 .fooclass-wrapper{
@@ -211,7 +234,7 @@ let fl = new FloodLight(config);
 		//Add the action for a command. Takes in a string array, a description and a function
 		cmd.addAction(["query"], "search {query} in google", implementSearchInGoogle);
 
-		let cmdSocial = fl.addCommand("s", "Search user name in social media");
+		let cmdSocial = fl.addCommand("shift+s", "Search user name in social media");
 
 		let implementSearchTwitter = function(obj) {
 			location.href = "https://twitter.com/" + encodeURI(obj.query)
@@ -224,7 +247,7 @@ let fl = new FloodLight(config);
 		cmdSocial.addAction(["query"], "search {query} in facebook", implementSearchFB);
 
 
-		let cmdCal = fl.addCommand("c", "Provide comma separated numbers");
+		let cmdCal = fl.addCommand("cmd+x", "Provide comma separated numbers");
 
 		//Add
 		let add = function(obj) {
