@@ -9,6 +9,8 @@ You can register any key. To run it will bind an event with your specified key a
 <p align="center">
 <img src="gifs/floodlight.gif" style="width:100%" /> 
 </p>
+
+
 ## Installation
 From CDN
 ```
