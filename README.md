@@ -4,6 +4,11 @@ Inspired from macOS spotlight, floodlight is simple JS library that will show a 
 You can register any key. To run it will bind an event with your specified key and `shift`
 | Important: `esc` closes floodlight! |
 | --- |
+
+ 
+<p align="center">
+<img src="gifs/floodlight.gif" style="width:100%" /> 
+</p>
 ## Installation
 From CDN
 ```
