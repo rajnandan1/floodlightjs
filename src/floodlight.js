@@ -7,6 +7,10 @@ class FloodLight {
         if (config && !!config.cssClassPrefix) {
             prefix = config.cssClassPrefix + "-";
         }
+		let paramSeparator = ","
+		if(config && config.paramSeparator && config.paramSeparator.length == 1){
+			paramSeparator = config.paramSeparator;
+		}
         let wrapper = prefix + "wrapper";
         let dropDown = prefix + "dropdown";
         let inputBox = prefix + "input";
@@ -26,11 +30,16 @@ class FloodLight {
             fontColor = "#efefef";
         }
         if (config && !!config.theme) {
+			if(typeof config.theme == "string"){
+				let th = config.theme
+				config.theme = {}
+				config.theme[th] = {}
+			}
             let pref = Object.keys(config.theme);
 
             if (pref[0] == "light") {
                 colorItem = "#fff";
-                colorItemActive = "#efefef";
+                colorItemActive = "#e1ebf7";
                 fontColor = "#1A1A40";
             } else if (pref[0] == "dark") {
                 colorItem = "#111";
@@ -190,6 +199,9 @@ class FloodLight {
             cmd.addAction = function (params, desc, fn) {
                 if (this.parameters === undefined) {
                     this.parameters = [];
+                }
+				 if (!Array.isArray(params) || params.length == 0) {
+                    throw new Error("First parameter should be a non-empty array");
                 }
                 this.parameters.push({
                     params: params,
@@ -473,7 +485,7 @@ class FloodLight {
             let inp = document
                 .getElementById(inputBox)
                 .value.trim()
-                .split(",")
+                .split(paramSeparator)
                 .map((x) => {
                     return x.trim();
                 });

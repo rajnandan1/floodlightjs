@@ -14,20 +14,31 @@ You can register any key. To trigger, it will bind an event with your specified 
 ## Installation
 From CDN
 ```
-<script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.5/dist/floodlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.6/dist/floodlight.min.js"></script>
 ```
 From NPM
 ```
 npm i floodlightjs
-import floodlight from 'floodlightjs';
 ```
 ## Demo + Documentation
 [Live instance of Floodlight](https://rajnandan1.github.io/floodlightjs/index.html)
+
+## Instantiation
+#### ES5
+```
+let fl = new FloodLight();
+```
+#### ES6
+```
+import floodlight from 'floodlightjs'
+if (typeof window !== 'undefined') {
+	let fl = floodlight();
+}
+```
 ## Basic Usage - Implement a quick google search `g`
 
 The below code implements a google search using floodgate. It will listen for the `g` key. When someone presses `g` it will show a search box.
 ```
-//import floodlight from 'floodlightjs'
 let fl = new FloodLight();
 
 //this takes to parameters. first parameter is the `key`, second is the description
@@ -97,6 +108,21 @@ fl.run();
 ## Customizations
 
 Floodlightjs gives you control over how the UI elements look. You can pass a class for advanced handling or use simple colors.
+#### Separator
+```
+let config = {
+    paramSeparator: " " //search box will break multiple inputs using space. Default is ','
+}
+let fl = new FloodLight(config);
+```
+#### Simple theme set
+By default it will autodetect browser theme 
+```
+let config = {
+    theme: "dark" //or light
+}
+let fl = new FloodLight(config);
+```
 #### Simple Colors light or dark theme
 ```
 let config = {

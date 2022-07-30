@@ -14,7 +14,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+<style>
 	.flcode{
 		color: #efefef;
 		background: #444;
@@ -51,177 +53,149 @@
 	</nav>
 	<div class="container">
 		<br>
-		<h2>Floodlight JS Examples</h2>
-		<hr />
-		<h3>Installation</h3>
-		<h6>From CDN</h6>
-		<code class="flcode block">
-		<pre >
-&lt;script src=&quot;https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.5/dist/floodlight.min.js&quot;&gt;&lt;/script&gt;
-</pre>
-		</code>
-		<h6>From NPM</h6>
-		<code class="flcode block">
-		<pre >
-npm i floodlightjs
-import floodlight from 'floodlightjs';
-</pre>
-		</code>
-		<hr />
-		<h4>➡️ Basic Usage - Implement a quick google search</h4>
-		<p class="text-secondary">
-			The below code implements a google search using <code class="flcode">floodlightjs</code>. It will listen for the <code class="flcode">g</code> key. When someone presses
-			<code class="flcode">g</code> it will show a search box.
-		</p>
-		<code class="flcode block">
-			<pre>
-let fl = new FloodLight();
-
-<span class="text-success">//this takes to parameters. first parameter is the `key`, second is the description</span>
-let cmd = fl.addCommand("g", "Search Something in google");
-
-<span class="text-success">//Implement a function that would handle the query. Takes one parameter</span>
-let implementSearchInGoogle = function(obj) {
-	location.href = "https://www.google.com/search?q=" + encodeURI(obj.query)
-};
-
-<span class="text-success">//Add the action for a command. Takes in a string array, a description and a function</span>
-cmd.addAction(["query"], "search {query} in google", implementSearchInGoogle);
-
-<span class="text-success">//Start floodlight. It will start listening</span>
-fl.run();
-			</pre>
-		</code>
-		<div class="text-primary alert alert-primary">
-			Try it. Hit <code class="flcode">g</code>
-		</div>
-
-		<div class="alert alert-warning">
-			Hit <code>esc</code> to close floodlight
-		</div>
-
-<!--Separator-->
-		<h4>➡️ Multiple Commands - Add Social media search</h4>
-		<p class="text-secondary">
-			The below code implements a social search using floodgate. It will listen for the <code class="flcode">shift+s</code> key. It attaches two actions to one command.
-		</p>
-		<code class="flcode block">
-			<pre>
-let fl = new FloodLight();
-
-let cmdSocial = fl.addCommand("shfit+s", "Search user name in social media");
-
-<span class="text-success">//Adding twitter</span>
-let implementSearchTwitter = function(obj) {
-	location.href = "https://twitter.com/" + encodeURI(obj.query)
-};
-cmdSocial.addAction(["query"], "search {query} in twitter", implementSearchTwitter);
-
-<span class="text-success">//Adding facebook</span>
-let implementSearchFB = function(obj) {
-	location.href = "https://www.facebook.com/" + encodeURI(obj.query)
-};
-cmdSocial.addAction(["query"], "search {query} in facebook", implementSearchFB);
- 
-fl.run();
-</pre>
-		</code>
-		<div class="text-primary alert alert-primary">
-			Try it. Hit <code class="flcode">shift+s</code>
-		</div>
+		<h1 id="floodlightjs">floodlightjs</h1>
+<p>Inspired from macOS spotlight, floodlight is simple JS library that will show a search area. How the search is handled is completely on you.</p>
+<p>You can register any key. To trigger, it will bind an event with your specified key and <code>shift</code>
+| Important: <code>esc</code> closes floodlight! |
+| --- |</p>
+<p align="center">
+<img src="gifs/floodlight.gif" style="width:100%" /> 
+</p>
 
 
-<!--Separator-->
-
-		<h4>➡️ Multiple Params, Multiple Commands - Add, Subtract, Multiply two or three numbers</h4>
-		<p class="text-secondary">
-			The below code implements arithmetic operation. It will listen for the <code class="flcode">cmd+x</code> or <code class="flcode">ctrl+x</code> key. It accepts more than one param.
-		</p>
-		<code class="flcode block">
-			<pre>
-let fl = new FloodLight();
-let cmdCal = fl.addCommand("cmd+x", "Provide comma separated numbers");
-
-<span class="text-success">//Add 2 numbers</span>
-let add = function(obj) {
-	alert(Number(obj.num1) + Number(obj.num2))
-};
-cmdCal.addAction(["num1", "num2"], "{num1} + {num2}", add);
-
-<span class="text-success">//Subtract 2 numbers</span>
-let sub = function(obj) {
-	alert(Number(obj.num1) - Number(obj.num2))
-};
-cmdCal.addAction(["num1", "num2"], "{num1} - {num2}", sub);
-
-<span class="text-success">//Multiply 3 numbers</span>
-let mul = function(obj) {
-	alert(Number(obj.num1) * Number(obj.num2) * Number(obj.num3))
-};
-cmdCal.addAction(["num1", "num2", "num3"], "{num1} x {num2} x {num3}", mul);
-
-fl.run();
-</pre>
-		</code>
-		<div class="text-primary alert alert-primary">
-			Try it. Hit <code class="flcode">cmd+x</code> or <code class="flcode">ctrl+x</code>
-		</div>
-<!--Separator-->
-		<h4>➡️ Customizations</h4>
-		<p class="text-secondary">
-			Floodlightjs gives you control over how the UI elements look. You can pass a class for advanced handling or use simple colors.
-		</p>
-		<h6>Simple Colors light or dark theme</h6>
-		<code class="flcode block">
-			<pre>
-let config = {
-	theme: {
-		dark:{ <span class="text-success">//light or dark</span>
-			primary: "#111",
-			secondary: "#231e24"
-		}
-	}
+<h2 id="installation">Installation</h2>
+<p>From CDN</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.6/dist/floodlight.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><p>From NPM</p>
+<pre><code>npm <span class="hljs-selector-tag">i</span> floodlightjs
+</code></pre><h2 id="demo-documentation">Demo + Documentation</h2>
+<p><a href="https://rajnandan1.github.io/floodlightjs/index.html">Live instance of Floodlight</a></p>
+<h2 id="instantiation">Instantiation</h2>
+<h4 id="es5">ES5</h4>
+<pre><code><span class="hljs-keyword">let</span> fl = <span class="hljs-function"><span class="hljs-keyword">new</span> <span class="hljs-title">FloodLight</span>();</span>
+</code></pre><h4 id="es6">ES6</h4>
+<pre><code><span class="hljs-keyword">import</span> floodlight <span class="hljs-keyword">from</span> <span class="hljs-string">'floodlightjs'</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> !== <span class="hljs-string">'undefined'</span>) {
+    <span class="hljs-keyword">let</span> fl = floodlight();
 }
-let fl = new FloodLight(config);
-			</pre>
-		</code>	
-		<h6>Add your class</h6>
-		<code class="flcode block">
-			<pre>
-let config = {
-	cssClassPrefix: "fooclass"
-}	
-<span class="text-success">//It will add this prefix in all the UI elements</span>
-let fl = new FloodLight(config);
-</pre></code>
-<h6>Add your CSS</h6>
-<code class="flcode block">
-			<pre>
-<span class="text-success">//Once added you can handle CSS like this</span>
+</code></pre><h2 id="basic-usage-implement-a-quick-google-search-g-">Basic Usage - Implement a quick google search <code>g</code></h2>
+<p>The below code implements a google search using floodgate. It will listen for the <code>g</code> key. When someone presses <code>g</code> it will show a search box.</p>
+<pre><code><span class="hljs-keyword">let</span> fl = <span class="hljs-keyword">new</span> FloodLight();
+
+<span class="hljs-comment">//this takes to parameters. first parameter is the `key`, second is the description</span>
+<span class="hljs-keyword">let</span> cmd = fl.addCommand(<span class="hljs-string">"g"</span>, <span class="hljs-string">"Search Something in google"</span>);
+
+<span class="hljs-comment">//Implement a function that would handle the query. Takes one parameter</span>
+<span class="hljs-keyword">let</span> implementSearchInGoogle = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj</span>) </span>{
+    location.href = <span class="hljs-string">"https://www.google.com/search?q="</span> + <span class="hljs-built_in">encodeURI</span>(obj.query)
+};
+
+<span class="hljs-comment">//Add the action for a command. Takes in a string array, a description and a function</span>
+cmd.addAction([<span class="hljs-string">"query"</span>], <span class="hljs-string">"search {query} in google"</span>, implementSearchInGoogle);
+
+<span class="hljs-comment">//Start floodlight. It will start listening</span>
+fl.run();
+</code></pre><h2 id="multiple-commands-add-social-media-search-shift-s-">Multiple Commands - Add Social media search <code>shift</code>+<code>s</code></h2>
+<p>The below code implements a social search using floodgate. It will listen for the <code>shift+s</code> key. It attaches two actions to one command.</p>
+<pre><code><span class="hljs-keyword">let</span> fl = <span class="hljs-keyword">new</span> FloodLight();
+<span class="hljs-keyword">let</span> cmdSocial = fl.addCommand(<span class="hljs-string">"s"</span>, <span class="hljs-string">"Search user name in social media"</span>);
+
+<span class="hljs-comment">//Adding twitter</span>
+<span class="hljs-keyword">let</span> implementSearchTwitter = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj</span>) </span>{
+    location.href = <span class="hljs-string">"https://twitter.com/"</span> + <span class="hljs-built_in">encodeURI</span>(obj.query)
+};
+cmdSocial.addAction([<span class="hljs-string">"query"</span>], <span class="hljs-string">"search {query} in twitter"</span>, implementSearchTwitter);
+
+<span class="hljs-comment">//Adding facebook</span>
+<span class="hljs-keyword">let</span> implementSearchFB = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj</span>) </span>{
+    location.href = <span class="hljs-string">"https://www.facebook.com/"</span> + <span class="hljs-built_in">encodeURI</span>(obj.query)
+};
+cmdSocial.addAction([<span class="hljs-string">"query"</span>], <span class="hljs-string">"search {query} in facebook"</span>, implementSearchFB);
+<span class="hljs-comment">//Start floodlight. It will start listening</span>
+fl.run();
+</code></pre><h2 id="multiple-params-multiple-commands-add-subtract-multiply-two-or-three-numbers-cmd-x-or-ctrl-x-">Multiple Params, Multiple Commands - Add, Subtract, Multiply two or three numbers <code>cmd</code>+<code>x</code> or <code>ctrl</code>+<code>x</code></h2>
+<p>The below code implements arithmetic operation. It will listen for the <code>ctrl+x</code> key. It accepts more than one param.</p>
+<pre><code><span class="hljs-keyword">let</span> fl = <span class="hljs-keyword">new</span> FloodLight();
+<span class="hljs-keyword">let</span> cmdCal = fl.addCommand(<span class="hljs-string">"ctrl+x"</span>, <span class="hljs-string">"Provide comma separated numbers"</span>);
+
+<span class="hljs-comment">//Add 2 numbers</span>
+<span class="hljs-keyword">let</span> add = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj</span>) </span>{
+    alert(<span class="hljs-built_in">Number</span>(obj.num1) + <span class="hljs-built_in">Number</span>(obj.num2))
+};
+cmdCal.addAction([<span class="hljs-string">"num1"</span>, <span class="hljs-string">"num2"</span>], <span class="hljs-string">"{num1} + {num2}"</span>, add);
+
+<span class="hljs-comment">//Subtract 2 numbers</span>
+<span class="hljs-keyword">let</span> sub = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj</span>) </span>{
+    alert(<span class="hljs-built_in">Number</span>(obj.num1) - <span class="hljs-built_in">Number</span>(obj.num2))
+};
+cmdCal.addAction([<span class="hljs-string">"num1"</span>, <span class="hljs-string">"num2"</span>], <span class="hljs-string">"{num1} - {num2}"</span>, sub);
+
+<span class="hljs-comment">//Multiply 3 numbers</span>
+<span class="hljs-keyword">let</span> mul = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj</span>) </span>{
+    alert(<span class="hljs-built_in">Number</span>(obj.num1) * <span class="hljs-built_in">Number</span>(obj.num2) * <span class="hljs-built_in">Number</span>(obj.num3))
+};
+cmdCal.addAction([<span class="hljs-string">"num1"</span>, <span class="hljs-string">"num2"</span>, <span class="hljs-string">"num3"</span>], <span class="hljs-string">"{num1} x {num2} x {num3}"</span>, mul);
+fl.run();
+</code></pre><h2 id="customizations">Customizations</h2>
+<p>Floodlightjs gives you control over how the UI elements look. You can pass a class for advanced handling or use simple colors.</p>
+<h4 id="separator">Separator</h4>
+<pre><code><span class="hljs-built_in">let</span> config = {
+    paramSeparator: <span class="hljs-string">" "</span> //search <span class="hljs-built_in">box</span> will <span class="hljs-built_in">break</span> multiple inputs using <span class="hljs-built_in">space</span>. Default <span class="hljs-built_in">is</span> ','
+}
+<span class="hljs-built_in">let</span> fl = <span class="hljs-built_in">new</span> FloodLight(config);
+</code></pre><h4 id="simple-theme-set">Simple theme set</h4>
+<p>By default it will autodetect browser theme </p>
+<pre><code><span class="hljs-keyword">let</span> <span class="hljs-keyword">config</span> = {
+    theme: <span class="hljs-string">"dark"</span> <span class="hljs-comment">//or light</span>
+}
+<span class="hljs-keyword">let</span> fl = <span class="hljs-keyword">new</span> FloodLight(<span class="hljs-keyword">config</span>);
+</code></pre><h4 id="simple-colors-light-or-dark-theme">Simple Colors light or dark theme</h4>
+<pre><code><span class="hljs-keyword">let</span> <span class="hljs-keyword">config</span> = {
+    theme: {
+        dark:{ <span class="hljs-comment">//light or dark</span>
+            primary: <span class="hljs-string">"#111"</span>,
+            secondary: <span class="hljs-string">"#231e24"</span>
+        }
+    }
+}
+<span class="hljs-keyword">let</span> fl = <span class="hljs-keyword">new</span> FloodLight(<span class="hljs-keyword">config</span>);
+</code></pre><h4 id="add-your-class">Add your class</h4>
+<pre><code><span class="hljs-keyword">let</span> <span class="hljs-keyword">config</span> = {
+    cssClassPrefix: <span class="hljs-string">"fooclass"</span>
+}    
+
+<span class="hljs-comment">//It will add this prefix in all the UI elements</span>
+<span class="hljs-keyword">let</span> fl = <span class="hljs-keyword">new</span> FloodLight(<span class="hljs-keyword">config</span>);
+</code></pre><h4 id="add-your-css">Add your CSS</h4>
+<pre><code><span class="hljs-comment">//Once added you can handle CSS like this</span>
 .fooclass-wrapper{
-	<span class="text-success">/*Main Overlay Component*/</span>
+    <span class="hljs-comment">/*Main Overlay Component*/</span>
 }
-.fooclass-search{
-	<span class="text-success">/*Main Component*/</span>
+.fooclass-<span class="hljs-keyword">search</span>{
+    <span class="hljs-comment">/*Main Component*/</span>
 }
-.fooclass-input{
-	<span class="text-success">/*Search Component*/</span>
+.fooclass-<span class="hljs-keyword">input</span>{
+    <span class="hljs-comment">/*Search Component*/</span>
 }
 .fooclass-dropdown{
-	<span class="text-success">/*Dropdown Component*/</span>
+    <span class="hljs-comment">/*Dropdown Component*/</span>
 }
 .fooclass-item{
-	<span class="text-success">/*Items Component*/</span>
+    <span class="hljs-comment">/*Items Component*/</span>
 }
-			</pre>
-		</code>
+</code></pre>
+
+<!-- end here-->
 		<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="rajnandan1" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FFDD00" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 	</div>
 
 	<!-- <script src="bisar.js" async defer></script> -->
 	<script type="text/javascript" src="src/floodlight.js"></script>
 	<script>
-		let fl = new FloodLight();
+		let fl = new FloodLight({
+			paramSeparator: ",",
+			theme: "light"
+		});
 		
 		//this takes to parameters. first parameter is the `key`, second is the description
 		let cmd = fl.addCommand("g", "Search Something in google");
@@ -270,7 +244,15 @@ let fl = new FloodLight(config);
 		cmdCal.addAction(["num1", "num2", "num3"], "{num1} x {num2} x {num3}", mul);
 		fl.run();
 	</script>
-	
+	<script>
+function highlightCode() {
+    var pres = document.querySelectorAll("pre>code");
+    for (var i = 0; i < pres.length; i++) {
+        hljs.highlightBlock(pres[i]);
+    }
+}
+highlightCode();
+</script>
 </body>
 
 </html>
