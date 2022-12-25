@@ -35,9 +35,9 @@ if (typeof window !== 'undefined') {
 	let fl = floodlight();
 }
 ```
-## Basic Usage - Implement a call to a function a
+## Basic Usage - Implement a call to a function `a`
 
-The below code implements a function that will trigger an alert box with a Hello World. It will listen for the a key. When someone presses a it will run.
+The below code implements a function that will trigger an alert box with `a` Hello World. It will listen for the a key. When someone presses `a` it will run.
 ```
 let fl = new FloodLight();
 
