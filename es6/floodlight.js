@@ -21,10 +21,7 @@ class FloodLight {
         let colorItem = "#fff";
         let colorItemActive = "#efefef";
         let fontColor = "#1A1A40";
-        if (
-            window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches
-        ) {
+        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
             colorItem = "#111";
             colorItemActive = "#231e24";
             fontColor = "#efefef";
@@ -200,7 +197,11 @@ class FloodLight {
                 if (this.parameters === undefined) {
                     this.parameters = [];
                 }
-				 if (!Array.isArray(params) || params.length == 0) {
+				if(typeof params === "function"){
+					fn = params;
+					params = [];
+					desc = "";
+				} else if (!Array.isArray(params) || params.length == 0) {
                     throw new Error("First parameter should be a non-empty array");
                 }
                 this.parameters.push({
@@ -362,6 +363,10 @@ class FloodLight {
             // document.getElementById("bisar-input").addEventListener("input", searchInput);
         }
         function addContainer(ix) {
+			if(allCommands[ix].parameters[0].params.length == 0){
+				allCommands[ix].parameters[0].fn();
+				return;
+			}
             let bisarMainDiv = document.getElementById(wrapper);
             if (bisarMainDiv === null) {
                 const template = document.createElement("div");

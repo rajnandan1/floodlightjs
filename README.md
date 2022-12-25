@@ -14,7 +14,7 @@ You can register any key. To trigger, it will bind an event with your specified 
 ## Installation
 From CDN
 ```
-<script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.6/dist/floodlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.7/dist/floodlight.min.js"></script>
 ```
 From NPM
 ```
@@ -34,6 +34,26 @@ import floodlight from 'floodlightjs'
 if (typeof window !== 'undefined') {
 	let fl = floodlight();
 }
+```
+## Basic Usage - Implement a call to a function a
+
+The below code implements a function that will trigger an alert box with a Hello World. It will listen for the a key. When someone presses a it will run.
+```
+let fl = new FloodLight();
+
+//this takes to parameters. first parameter is the `key`, second is the description
+let cmdHelloWorld = fl.addCommand("a", "Alert hello world");
+
+//Implement a function that would handle the query
+let helloWorld = function() {
+    alert("hello world")
+};
+
+//Add the action for a command. Takes a function as first param
+cmd.addAction(helloWorld);
+
+//Start floodlight. It will start listening
+fl.run();
 ```
 ## Basic Usage - Implement a quick google search `g`
 

@@ -59,13 +59,13 @@
 | Important: <code>esc</code> closes floodlight! |
 | --- |</p>
 <p align="center">
-<img src="gifs/floodlight.gif" style="width:100%" /> 
+<img src="gifs/floodlight.gif" style="width:100%; box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;border-radius: 10px;" /> 
 </p>
 
 
 <h2 id="installation">Installation</h2>
 <p>From CDN</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.6/dist/floodlight.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/gh/rajnandan1/floodlightjs@1.0.7/dist/floodlight.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre><p>From NPM</p>
 <pre><code>npm <span class="hljs-selector-tag">i</span> floodlightjs
 </code></pre><h2 id="demo-documentation">Demo + Documentation</h2>
@@ -78,12 +78,36 @@
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> !== <span class="hljs-string">'undefined'</span>) {
     <span class="hljs-keyword">let</span> fl = floodlight();
 }
-</code></pre><h2 id="basic-usage-implement-a-quick-google-search-g-">Basic Usage - Implement a quick google search <code>g</code></h2>
+</code></pre>
+<!-- One section -->
+<h2 id="basic-usage-implement-a-quick-google-search-g-">Basic Usage - Implement a call to a function <code>a</code></h2>
+<p>The below code implements a function that will trigger an alert box with a Hello World. It will listen for the <code>a</code> key. When someone presses <code>a</code> it will run.</p>
+<pre><code><span class="hljs-keyword">let</span> fl = <span class="hljs-keyword">new</span> FloodLight();
+
+<span class="hljs-comment">//this takes to parameters. first parameter is the `key`, second is the description</span>
+<span class="hljs-keyword">let</span> cmdHelloWorld = fl.addCommand(<span class="hljs-string">"a"</span>, <span class="hljs-string">"Alert hello world"</span>);
+
+<span class="hljs-comment">//Implement a function that would handle the query</span>
+<span class="hljs-keyword">let</span> helloWorld = <span class="hljs-function"><span class="hljs-keyword">function</span>() </span>{
+    alert(<span class="hljs-string">"hello world"</span>)
+};
+
+<span class="hljs-comment">//Add the action for a command. Takes a function as first param</span>
+cmd.addAction(helloWorld);
+
+<span class="hljs-comment">//Start floodlight. It will start listening</span>
+fl.run();
+</code></pre>
+<!-- One section -->
+<!-- One section -->
+<h2 id="basic-usage-implement-a-quick-google-search-g-">Basic Usage - Implement a quick google search <code>g</code></h2>
 <p>The below code implements a google search using floodgate. It will listen for the <code>g</code> key. When someone presses <code>g</code> it will show a search box.</p>
 <pre><code><span class="hljs-keyword">let</span> fl = <span class="hljs-keyword">new</span> FloodLight();
 
 <span class="hljs-comment">//this takes to parameters. first parameter is the `key`, second is the description</span>
 <span class="hljs-keyword">let</span> cmd = fl.addCommand(<span class="hljs-string">"g"</span>, <span class="hljs-string">"Search Something in google"</span>);
+
+
 
 <span class="hljs-comment">//Implement a function that would handle the query. Takes one parameter</span>
 <span class="hljs-keyword">let</span> implementSearchInGoogle = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj</span>) </span>{
@@ -95,7 +119,9 @@ cmd.addAction([<span class="hljs-string">"query"</span>], <span class="hljs-stri
 
 <span class="hljs-comment">//Start floodlight. It will start listening</span>
 fl.run();
-</code></pre><h2 id="multiple-commands-add-social-media-search-shift-s-">Multiple Commands - Add Social media search <code>shift</code>+<code>s</code></h2>
+</code></pre>
+<!-- One section -->
+<h2 id="multiple-commands-add-social-media-search-shift-s-">Multiple Commands - Add Social media search <code>shift</code>+<code>s</code></h2>
 <p>The below code implements a social search using floodgate. It will listen for the <code>shift+s</code> key. It attaches two actions to one command.</p>
 <pre><code><span class="hljs-keyword">let</span> fl = <span class="hljs-keyword">new</span> FloodLight();
 <span class="hljs-keyword">let</span> cmdSocial = fl.addCommand(<span class="hljs-string">"s"</span>, <span class="hljs-string">"Search user name in social media"</span>);
@@ -198,16 +224,18 @@ fl.run();
 		
 		//this takes to parameters. first parameter is the `key`, second is the description
 		let cmd = fl.addCommand("g", "Search Something in google");
-
 		//Implement a function that would handle the query. Takes one parameter
-
 		let implementSearchInGoogle = function(obj) {
 			location.href = "https://www.google.com/search?q=" + encodeURI(obj.query)
 		};
-
-
 		//Add the action for a command. Takes in a string array, a description and a function
 		cmd.addAction(["query"], "search {query} in google", implementSearchInGoogle);
+
+		// let cmdHelloWorld = fl.addCommand("a", "alert hello world");
+		let alertHelloWorld = function() {
+			alert("Hello World")
+		};
+		fl.addCommand("a", "alert hello world").addAction(alertHelloWorld);
 
 		let cmdSocial = fl.addCommand("shift+s", "Search user name in social media");
 
