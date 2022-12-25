@@ -1,7 +1,7 @@
 # floodlightjs
 Inspired from macOS spotlight, floodlight is simple JS library that will show a search area. How the search is handled is completely on you.
 
-You can register any key. To trigger, it will bind an event with your specified key and `shift`
+You can register any key. To trigger, it will bind an event with your specified key and or key combo
 | Important: `esc` closes floodlight! |
 | --- |
 
